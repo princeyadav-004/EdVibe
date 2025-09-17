@@ -1,31 +1,23 @@
-import { Header } from "@/components/landing/header";
-import { Footer } from "@/components/landing/footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
-import { redirect } from 'next/navigation';
 
-// This is a placeholder for a server action.
-// In a real app, this would save the data to a database.
-async function addReview(formData: FormData) {
-  "use server";
-  const rawFormData = {
-    name: formData.get('name'),
-    course: formData.get('course'),
-    review: formData.get('review'),
-  };
-  console.log("New review submitted:", rawFormData);
-  // Here you would typically save to a database.
-  // For now, we'll just log it to the server console.
-  
-  // After saving, redirect the user to the testimonials page.
-  redirect('/testimonials');
-}
+'use client';
+
+import { useActionState } from 'react';
+import { addReview, ReviewState } from '@/app/actions';
+import { Header } from '@/components/landing/header';
+import { Footer } from '@/components/landing/footer';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Star, Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
 
 export default function NewTestimonialPage() {
+  const initialState: ReviewState = { message: null, errors: {} };
+  const [state, dispatch, pending] = useActionState(addReview, initialState);
+  
   return (
     <div className="flex min-h-screen flex-col bg-muted/20">
       <Header />
@@ -34,27 +26,43 @@ export default function NewTestimonialPage() {
           <Card className="w-full max-w-2xl shadow-xl">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                  <div className="rounded-full bg-secondary/10 p-3 border-2 border-secondary/20">
-                    <Star className="h-7 w-7 text-secondary" />
-                  </div>
+                <div className="rounded-full bg-secondary/10 p-3 border-2 border-secondary/20">
+                  <Star className="h-7 w-7 text-secondary" />
+                </div>
               </div>
               <CardTitle className="font-headline text-3xl">Share Your Success Story</CardTitle>
-              <CardDescription className="text-lg">
+              <CardDescription className="text-lg text-muted-foreground">
                 Your feedback helps us and inspires future students.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={addReview} className="space-y-6">
+              <form action={dispatch} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-base">Your Full Name</Label>
+                  <Label htmlFor="name" className="text-base font-medium">Your Full Name</Label>
                   <Input id="name" name="name" placeholder="e.g., Rohan Mehra" required className="bg-background" />
+                  <div id="name-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.name &&
+                      state.errors.name.map((error: string) => (
+                        <p className="mt-1 text-sm text-destructive" key={error}>
+                          {error}
+                        </p>
+                      ))}
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="course" className="text-base">Course You Took</Label>
+                  <Label htmlFor="course" className="text-base font-medium">Course You Took</Label>
                   <Input id="course" name="course" placeholder="e.g., Web Development" required className="bg-background"/>
+                   <div id="course-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.course &&
+                      state.errors.course.map((error: string) => (
+                        <p className="mt-1 text-sm text-destructive" key={error}>
+                          {error}
+                        </p>
+                      ))}
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="review" className="text-base">Your Review</Label>
+                  <Label htmlFor="review" className="text-base font-medium">Your Review</Label>
                   <Textarea
                     id="review"
                     name="review"
@@ -63,12 +71,28 @@ export default function NewTestimonialPage() {
                     rows={6}
                     className="bg-background"
                   />
+                   <div id="review-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.review &&
+                      state.errors.review.map((error: string) => (
+                        <p className="mt-1 text-sm text-destructive" key={error}>
+                          {error}
+                        </p>
+                      ))}
+                  </div>
                 </div>
                 <div className="text-center pt-2">
-                  <Button type="submit" size="lg">
-                    Submit Your Review
+                  <Button type="submit" size="lg" disabled={pending} className={cn("transition-all", pending && "cursor-not-allowed")}>
+                    {pending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : 'Submit Your Review'}
                   </Button>
                 </div>
+                 {state.message && (
+                  <p className="mt-4 text-sm text-destructive text-center">{state.message}</p>
+                )}
               </form>
             </CardContent>
           </Card>
@@ -78,3 +102,4 @@ export default function NewTestimonialPage() {
     </div>
   );
 }
+
