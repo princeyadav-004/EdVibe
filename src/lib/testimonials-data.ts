@@ -16,10 +16,15 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     const reviewsCollection = collection(db, 'reviews');
     const q = query(reviewsCollection, orderBy('createdAt', 'desc'));
     const reviewSnapshot = await getDocs(q);
-    const reviewsList = reviewSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...(doc.data() as Omit<Testimonial, 'id'>),
-    }));
+    const reviewsList = reviewSnapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        name: data.name,
+        course: data.course,
+        review: data.review,
+      };
+    });
      // Combine initial static data with Firestore data, ensuring no duplicates
     const combined = [...reviewsList, ...initialData.testimonials];
     const uniqueTestimonials = Array.from(new Set(combined.map(a => a.id)))
@@ -40,7 +45,13 @@ export async function getTestimonialById(id: string): Promise<Testimonial | unde
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() } as Testimonial;
+      const data = docSnap.data();
+      return { 
+        id: docSnap.id,
+        name: data.name,
+        course: data.course,
+        review: data.review,
+      };
     } else {
       // Fallback to searching in the static data if not found in Firestore
       return initialData.testimonials.find(t => t.id === id);
