@@ -3,7 +3,9 @@
 
 import { recommendCourses, RecommendCoursesOutput } from "@/ai/flows/course-recommendation";
 import { generateCareerPath, GenerateCareerPathOutput } from "@/ai/flows/career-path-flow";
+import { getTutorResponse, TutorInput } from "@/ai/flows/tutor-flow";
 import { z } from "zod";
+import { Message } from "genkit";
 
 const availableCourses = [
   "Web Development",
@@ -112,5 +114,55 @@ export async function getCareerPath(
   } catch (error) {
     console.error("AI Error:", error);
     return { message: "An unexpected error occurred while generating your career path." };
+  }
+}
+
+// Schema for the AI Tutor
+export type TutorMessage = {
+  role: 'user' | 'model';
+  text: string;
+};
+
+export type TutorState = {
+  messages: TutorMessage[];
+  error?: string | null;
+};
+
+export async function askTutor(prevState: TutorState, formData: FormData): Promise<TutorState> {
+  const question = formData.get("question") as string;
+
+  if (!question || question.trim().length === 0) {
+    return { ...prevState, error: "Please enter a question." };
+  }
+
+  const userMessage: TutorMessage = { role: 'user', text: question };
+  const newMessages: TutorMessage[] = [...prevState.messages, userMessage];
+
+  try {
+    // Convert TutorMessage to Genkit Message format for the flow
+    const history: Message[] = newMessages.slice(0, -1).map(msg => ({
+      role: msg.role,
+      parts: [{ text: msg.text }],
+    }));
+
+    const tutorInput: TutorInput = {
+      history,
+      question: question,
+    };
+    
+    const responseText = await getTutorResponse(tutorInput);
+    
+    const modelMessage: TutorMessage = { role: 'model', text: responseText };
+
+    return {
+      messages: [...newMessages, modelMessage],
+      error: null,
+    };
+  } catch (error) {
+    console.error("AI Tutor Error:", error);
+    return {
+      ...prevState,
+      error: "Sorry, I encountered an error trying to get an answer. Please try again.",
+    };
   }
 }

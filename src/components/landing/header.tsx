@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { BookOpen, Menu, X } from "lucide-react";
+import { BookOpen, Menu, X, Bot } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,11 +13,12 @@ import {
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#courses", label: "Courses" },
-  { href: "#career-path", label: "Career Path" },
-  { href: "#faculty", label: "Faculty" },
+  { href: "/#courses", label: "Courses" },
+  { href: "/#career-path", label: "Career Path" },
+  { href: "/tutor", label: "AI Tutor" },
+  { href: "/#faculty", label: "Faculty" },
   { href: "/testimonials", label: "Testimonials" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Header() {
@@ -45,7 +46,7 @@ export function Header() {
         </div>
         <div className="flex flex-1 items-center justify-end">
           <Button className="hidden md:flex" asChild>
-            <Link href="#contact">Join Now</Link>
+            <Link href="/#contact">Join Now</Link>
           </Button>
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild>
@@ -81,7 +82,7 @@ export function Header() {
                   ))}
                 </nav>
                 <Button onClick={() => setIsMenuOpen(false)} asChild>
-                  <Link href="#contact">Join Now</Link>
+                  <Link href="/#contact">Join Now</Link>
                 </Button>
               </div>
             </SheetContent>
