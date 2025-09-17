@@ -39,7 +39,7 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="border-primary-foreground/50 text-white hover:bg-white/10 transition-transform hover:scale-105"
+              className="border-primary-foreground/50 bg-white/10 text-white hover:bg-white/20 transition-transform hover:scale-105"
               asChild
             >
               <Link href="#courses">Explore Courses</Link>
