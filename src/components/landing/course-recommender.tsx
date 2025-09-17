@@ -1,14 +1,14 @@
 
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
+import { useActionState, useEffect } from "react";
 import { getCourseRecommendations, State } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Lightbulb, Loader2, PartyPopper, AlertCircle } from "lucide-react";
 
@@ -33,7 +33,7 @@ function SubmitButton() {
 
 export function CourseRecommender() {
   const initialState: State = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(getCourseRecommendations, initialState);
+  const [state, dispatch] = useActionState(getCourseRecommendations, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
