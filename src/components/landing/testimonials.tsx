@@ -13,16 +13,16 @@ import {
 } from '@/components/ui/carousel';
 import { Card, CardContent } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { testimonialsData as initialTestimonials, type Testimonial } from '@/lib/testimonials-data';
+import type { Testimonial } from '@/lib/testimonials-data';
 import Autoplay from 'embla-carousel-autoplay';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { Star } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 type TestimonialsProps = {
-  newReview?: Testimonial | null;
+  testimonials: Testimonial[];
 };
 
 const TRUNCATE_WORD_COUNT = 20;
@@ -45,19 +45,9 @@ function TestimonialReview({ review, id }: { review: string, id: string }) {
 }
 
 
-export function Testimonials({ newReview }: TestimonialsProps) {
+export function Testimonials({ testimonials: testimonialsData }: TestimonialsProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-
-  const testimonialsData = useMemo(() => {
-    if (newReview) {
-      if (initialTestimonials.some(t => t.id === newReview.id)) {
-        return initialTestimonials;
-      }
-      return [newReview, ...initialTestimonials];
-    }
-    return initialTestimonials;
-  }, [newReview]);
 
   useEffect(() => {
     if (!api) {
@@ -69,13 +59,8 @@ export function Testimonials({ newReview }: TestimonialsProps) {
     api.on('select', () => {
       setCurrent(api.selectedScrollSnap());
     });
-    
-    if (newReview) {
-      api.scrollTo(0, false);
-      setCurrent(0);
-    }
 
-  }, [api, newReview]);
+  }, [api]);
 
   return (
     <section
@@ -109,7 +94,6 @@ export function Testimonials({ newReview }: TestimonialsProps) {
           <CarouselContent className="-ml-4">
             {testimonialsData.map((testimonial, index) => {
               const testimonialImage = PlaceHolderImages.find(img => img.id === testimonial.id);
-              const isNew = newReview && testimonial.id === newReview.id;
               return (
                 <CarouselItem
                   key={testimonial.id}
@@ -119,11 +103,6 @@ export function Testimonials({ newReview }: TestimonialsProps) {
                   )}
                 >
                   <Card className="h-full flex flex-col justify-between shadow-lg relative overflow-hidden">
-                     {isNew && (
-                        <Badge className="absolute top-4 right-4 z-10 bg-secondary text-secondary-foreground">
-                          Just Added!
-                        </Badge>
-                      )}
                     <CardContent className="flex flex-col items-center p-8 text-center">
                      
                       {testimonialImage ? (

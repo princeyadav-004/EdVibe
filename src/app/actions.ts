@@ -6,8 +6,9 @@ import { generateCareerPath, GenerateCareerPathOutput } from '@/ai/flows/career-
 import { getTutorResponse, TutorInput } from '@/ai/flows/tutor-flow';
 import { z } from 'zod';
 import { Message } from 'genkit';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const availableCourses = [
   'Web Development',
@@ -211,19 +212,18 @@ export async function addReview(prevState: ReviewState, formData: FormData): Pro
 
   const newReview = {
     ...validatedFields.data,
-    id: `testimonial-new-${Date.now()}`, // Temporary unique ID
+    createdAt: serverTimestamp(),
   };
   
-  console.log('New review submitted (not saved permanently):', newReview);
-  
-  // Since we don't have a database, we'll store the new review in a cookie
-  // to be displayed temporarily on the testimonials page.
-  cookies().set('new_review', JSON.stringify(newReview), {
-    path: '/',
-    maxAge: 300, // Cookie will expire in 5 minutes
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-  });
+  try {
+    const docRef = await addDoc(collection(db, "reviews"), newReview);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return {
+      message: 'Failed to submit review. Please try again later.',
+    }
+  }
 
   // After saving, redirect the user to the testimonials page.
   redirect('/testimonials');

@@ -11,8 +11,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
-export default function TestimonialDetailPage({ params }: { params: { id: string } }) {
-  const testimonial = getTestimonialById(params.id);
+export default async function TestimonialDetailPage({ params }: { params: { id: string } }) {
+  const testimonial = await getTestimonialById(params.id);
 
   if (!testimonial) {
     notFound();
