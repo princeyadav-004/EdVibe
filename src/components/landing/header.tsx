@@ -17,7 +17,7 @@ const navLinks = [
   { href: "#courses", label: "Courses" },
   { href: "#recommender", label: "AI Recommender" },
   { href: "#faculty", label: "Faculty" },
-  { href: "#testimonials", label: "Testimonials" },
+  { href: "/testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ];
 
