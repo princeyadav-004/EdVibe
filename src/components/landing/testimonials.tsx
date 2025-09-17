@@ -25,13 +25,32 @@ type TestimonialsProps = {
   newReview?: Testimonial | null;
 };
 
+const TRUNCATE_WORD_COUNT = 20;
+
+function TestimonialReview({ review, id }: { review: string, id: string }) {
+  const words = review.split(' ');
+  const isTruncated = words.length > TRUNCATE_WORD_COUNT;
+  const truncatedText = isTruncated ? words.slice(0, TRUNCATE_WORD_COUNT).join(' ') + '...' : review;
+
+  return (
+    <>
+      <p className="italic text-muted-foreground flex-grow">"{truncatedText}"</p>
+      {isTruncated && (
+        <Link href={`/testimonials/${id}`} className="text-sm text-primary hover:underline mt-2">
+          Read More
+        </Link>
+      )}
+    </>
+  );
+}
+
+
 export function Testimonials({ newReview }: TestimonialsProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
   const testimonialsData = useMemo(() => {
     if (newReview) {
-      // Prevent adding duplicates on fast-refresh in dev
       if (initialTestimonials.some(t => t.id === newReview.id)) {
         return initialTestimonials;
       }
@@ -51,7 +70,6 @@ export function Testimonials({ newReview }: TestimonialsProps) {
       setCurrent(api.selectedScrollSnap());
     });
     
-    // If a new review was added, jump to it.
     if (newReview) {
       api.scrollTo(0, false);
       setCurrent(0);
@@ -124,7 +142,7 @@ export function Testimonials({ newReview }: TestimonialsProps) {
                            </span>
                          </div>
                       )}
-                      <p className="italic text-muted-foreground flex-grow">"{testimonial.review}"</p>
+                      <TestimonialReview review={testimonial.review} id={testimonial.id} />
                       <div className="mt-6">
                         <p className="font-semibold text-lg">{testimonial.name}</p>
                         <p className="text-sm text-primary font-medium">{testimonial.course}</p>

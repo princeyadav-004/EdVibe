@@ -8,3 +8,7 @@ export type Testimonial = {
 };
 
 export const testimonialsData: Testimonial[] = data.testimonials;
+
+export function getTestimonialById(id: string): Testimonial | undefined {
+  return testimonialsData.find(t => t.id === id);
+}
