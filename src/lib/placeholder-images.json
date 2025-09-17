@@ -1,3 +1,64 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-students",
+      "description": "Students collaborating in a modern classroom.",
+      "imageUrl": "https://picsum.photos/seed/100/1920/1080",
+      "imageHint": "students classroom"
+    },
+    {
+      "id": "course-web-dev",
+      "description": "Abstract representation of web development code.",
+      "imageUrl": "https://picsum.photos/seed/101/600/400",
+      "imageHint": "programming code"
+    },
+    {
+      "id": "course-data-science",
+      "description": "A complex network graph representing data connections.",
+      "imageUrl": "https://picsum.photos/seed/102/600/400",
+      "imageHint": "data visualization"
+    },
+    {
+      "id": "course-ui-ux",
+      "description": "User interface design wireframes on a screen.",
+      "imageUrl": "https://picsum.photos/seed/103/600/400",
+      "imageHint": "interface design"
+    },
+    {
+      "id": "faculty-1",
+      "description": "Portrait of a smiling male professor.",
+      "imageUrl": "https://picsum.photos/seed/201/400/400",
+      "imageHint": "male professor"
+    },
+    {
+      "id": "faculty-2",
+      "description": "Portrait of a confident female teacher.",
+      "imageUrl": "https://picsum.photos/seed/202/400/400",
+      "imageHint": "female teacher"
+    },
+    {
+      "id": "faculty-3",
+      "description": "Portrait of a professional mentor.",
+      "imageUrl": "https://picsum.photos/seed/203/400/400",
+      "imageHint": "professional mentor"
+    },
+    {
+      "id": "testimonial-1",
+      "description": "Happy student giving a thumbs up.",
+      "imageUrl": "https://picsum.photos/seed/301/200/200",
+      "imageHint": "smiling student"
+    },
+    {
+      "id": "testimonial-2",
+      "description": "Student working on a laptop, looking pleased.",
+      "imageUrl": "https://picsum.photos/seed/302/200/200",
+      "imageHint": "happy student"
+    },
+    {
+      "id": "testimonial-3",
+      "description": "A graduate in cap and gown, smiling.",
+      "imageUrl": "https://picsum.photos/seed/303/200/200",
+      "imageHint": "student graduate"
+    }
+  ]
 }
