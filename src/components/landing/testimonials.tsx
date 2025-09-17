@@ -1,58 +1,40 @@
-
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { testimonialsData } from "@/lib/testimonials-data";
 import Autoplay from "embla-carousel-autoplay";
-
-const testimonialsData = [
-  {
-    id: "testimonial-1",
-    name: "Rohan Mehra",
-    course: "Web Development",
-    review: "The hands-on projects were incredible. I landed a job even before I finished the course!",
-  },
-  {
-    id: "testimonial-2",
-    name: "Anjali Desai",
-    course: "UI/UX Design",
-    review: "EdVibe completely changed my career path. The instructors are so supportive and knowledgeable.",
-  },
-  {
-    id: "testimonial-3",
-    name: "Vikram Chauhan",
-    course: "Data Science",
-    review: "A truly transformative experience. The curriculum is top-notch and industry-relevant.",
-  },
-  {
-    id: "testimonial-4",
-    name: "Priya Patel",
-    course: "Digital Marketing",
-    review: "The practical skills I learned were immediately applicable to my job. Highly recommended!",
-  },
-  {
-    id: "testimonial-5",
-    name: "Amit Kumar",
-    course: "Machine Learning",
-    review: "Deep, challenging, and incredibly rewarding. The instructors are experts in their field.",
-  },
-  {
-    id: "testimonial-6",
-    name: "Sneha Reddy",
-    course: "Cloud Computing",
-    review: "This course opened up so many doors for me. I'm now a certified cloud practitioner!",
-  },
-];
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Star } from "lucide-react";
 
 export function Testimonials() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
   return (
     <section id="testimonials" className="bg-gradient-to-br from-primary via-purple-700 to-accent py-20 sm:py-28">
       <div className="container">
@@ -61,13 +43,14 @@ export function Testimonials() {
             What Our Students Say
           </h2>
           <p className="mt-4 text-lg text-primary-foreground/80">
-            Real stories from students who achieved their dreams with EdVibe.
+            Real stories from {testimonialsData.length} students who achieved their dreams with EdVibe.
           </p>
         </div>
 
         <Carousel
+          setApi={setApi}
           opts={{
-            align: "start",
+            align: "center",
             loop: true,
           }}
           plugins={[
@@ -80,35 +63,49 @@ export function Testimonials() {
         >
           <CarouselContent className="-ml-4">
             {testimonialsData.map((testimonial, index) => {
-               const testimonialImage = PlaceHolderImages.find((img) => img.id === testimonial.id);
+              const testimonialImage = PlaceHolderImages.find((img) => img.id === testimonial.id);
               return (
-              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <Card className="h-full flex flex-col justify-between">
-                  <CardContent className="flex flex-col items-center p-8 text-center">
-                    {testimonialImage && (
-                      <Image
-                        src={testimonialImage.imageUrl}
-                        alt={`Photo of ${testimonial.name}`}
-                        width={80}
-                        height={80}
-                        className="mb-6 h-20 w-20 rounded-full object-cover border-4 border-white/50"
-                        data-ai-hint={testimonialImage.imageHint}
-                      />
-                    )}
-                    <p className="italic text-muted-foreground flex-grow">"{testimonial.review}"</p>
-                    <div className="mt-6">
-                      <p className="font-semibold text-lg">{testimonial.name}</p>
-                      <p className="text-sm text-primary font-medium">{testimonial.course}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            );
+                <CarouselItem
+                  key={index}
+                  className={cn(
+                    "pl-4 transition-transform duration-300 ease-in-out md:basis-1/2 lg:basis-1/3",
+                    index === current ? "scale-100" : "scale-90 opacity-60"
+                  )}
+                >
+                  <Card className="h-full flex flex-col justify-between shadow-lg">
+                    <CardContent className="flex flex-col items-center p-8 text-center">
+                      {testimonialImage && (
+                        <Image
+                          src={testimonialImage.imageUrl}
+                          alt={`Photo of ${testimonial.name}`}
+                          width={80}
+                          height={80}
+                          className="mb-6 h-20 w-20 rounded-full object-cover border-4 border-white/50"
+                          data-ai-hint={testimonialImage.imageHint}
+                        />
+                      )}
+                      <p className="italic text-muted-foreground flex-grow">"{testimonial.review}"</p>
+                      <div className="mt-6">
+                        <p className="font-semibold text-lg">{testimonial.name}</p>
+                        <p className="text-sm text-primary font-medium">{testimonial.course}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              );
             })}
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex -left-12" />
-          <CarouselNext className="hidden sm:flex -right-12" />
+          <CarouselPrevious className="hidden sm:flex -left-12 bg-white/30 text-white border-white/50 hover:bg-white/50" />
+          <CarouselNext className="hidden sm:flex -right-12 bg-white/30 text-white border-white/50 hover:bg-white/50" />
         </Carousel>
+        <div className="mt-12 text-center">
+          <Button asChild size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-primary">
+            <Link href="/testimonials/new">
+              <Star className="mr-2 h-4 w-4" />
+              Add Your Review
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

@@ -1,0 +1,40 @@
+{
+  "testimonials": [
+    {
+      "id": "testimonial-1",
+      "name": "Rohan Mehra",
+      "course": "Web Development",
+      "review": "The hands-on projects were incredible. I landed a job even before I finished the course!"
+    },
+    {
+      "id": "testimonial-2",
+      "name": "Anjali Desai",
+      "course": "UI/UX Design",
+      "review": "EdVibe completely changed my career path. The instructors are so supportive and knowledgeable."
+    },
+    {
+      "id": "testimonial-3",
+      "name": "Vikram Chauhan",
+      "course": "Data Science",
+      "review": "A truly transformative experience. The curriculum is top-notch and industry-relevant."
+    },
+    {
+      "id": "testimonial-4",
+      "name": "Priya Patel",
+      "course": "Digital Marketing",
+      "review": "The practical skills I learned were immediately applicable to my job. Highly recommended!"
+    },
+    {
+      "id": "testimonial-5",
+      "name": "Amit Kumar",
+      "course": "Machine Learning",
+      "review": "Deep, challenging, and incredibly rewarding. The instructors are experts in their field."
+    },
+    {
+      "id": "testimonial-6",
+      "name": "Sneha Reddy",
+      "course": "Cloud Computing",
+      "review": "This course opened up so many doors for me. I'm now a certified cloud practitioner!"
+    }
+  ]
+}
