@@ -5,6 +5,7 @@ import { Faculty } from "@/components/landing/faculty";
 import { ContactCta } from "@/components/landing/contact-cta";
 import { Footer } from "@/components/landing/footer";
 import { CareerPath } from "@/components/landing/career-path";
+import { AnimatedSection } from "@/components/landing/animated-section";
 
 export default function Home() {
   return (
@@ -12,10 +13,18 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <Courses />
-        <CareerPath />
-        <Faculty />
-        <ContactCta />
+        <AnimatedSection>
+          <Courses />
+        </AnimatedSection>
+        <AnimatedSection>
+          <CareerPath />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Faculty />
+        </AnimatedSection>
+        <AnimatedSection>
+          <ContactCta />
+        </AnimatedSection>
       </main>
       <Footer />
     </div>
