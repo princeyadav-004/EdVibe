@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/#courses", label: "Courses" },
+  { href: "/about", label: "About Us" },
   { href: "/#career-path", label: "Career Path" },
   { href: "/tutor", label: "AI Tutor" },
   { href: "/#faculty", label: "Faculty" },

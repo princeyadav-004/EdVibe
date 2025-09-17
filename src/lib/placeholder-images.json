@@ -113,6 +113,12 @@
       "description": "A map showing customer distribution.",
       "imageUrl": "https://picsum.photos/seed/406/800/600",
       "imageHint": "customer map"
+    },
+    {
+      "id": "about-hero",
+      "description": "A diverse group of people collaborating around a table.",
+      "imageUrl": "https://picsum.photos/seed/501/1920/1080",
+      "imageHint": "team collaboration"
     }
   ]
 }
