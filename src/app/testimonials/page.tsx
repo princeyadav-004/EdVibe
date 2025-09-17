@@ -14,8 +14,6 @@ export default function TestimonialsPage() {
   if (newReviewCookie?.value) {
     try {
       newReview = JSON.parse(newReviewCookie.value);
-      // Immediately clear the cookie after reading it
-      cookieStore.delete('new_review');
     } catch (e) {
       console.error("Failed to parse new_review cookie", e);
     }
