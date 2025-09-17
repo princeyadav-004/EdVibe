@@ -36,7 +36,7 @@ export function Faculty() {
   return (
     <section id="faculty">
       <div className="container">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
+        <div className="mx-auto mb-16 max-w-2xl text-center">
           <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl md:text-5xl">
             Meet Our Expert Faculty
           </h2>
@@ -50,7 +50,7 @@ export function Faculty() {
             return (
               <Card
                 key={member.name}
-                className="overflow-hidden text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+                className="overflow-hidden text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col"
               >
                 <CardHeader className="bg-muted/30 pb-4">
                   {facultyImage && (
@@ -64,12 +64,12 @@ export function Faculty() {
                     />
                   )}
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-6 flex-1">
                   <CardTitle className="font-headline text-2xl">{member.name}</CardTitle>
                   <CardDescription className="mt-1 text-primary">{member.title}</CardDescription>
                 </CardContent>
-                <CardFooter className="flex-col gap-2 bg-muted/30 px-6 pb-6 pt-4">
-                  <p className="text-sm font-semibold text-muted-foreground">Achievements</p>
+                <CardFooter className="flex-col gap-3 bg-muted/30 px-6 py-4">
+                  <p className="text-sm font-semibold text-muted-foreground">Key Achievements</p>
                   <div className="flex flex-wrap justify-center gap-2">
                     {member.badges.map((badge) => (
                       <Badge key={badge} variant="secondary">

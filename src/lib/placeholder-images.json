@@ -59,6 +59,24 @@
       "description": "A graduate in cap and gown, smiling.",
       "imageUrl": "https://picsum.photos/seed/303/200/200",
       "imageHint": "student graduate"
+    },
+    {
+      "id": "testimonial-4",
+      "description": "Student in a library, smiling.",
+      "imageUrl": "https://picsum.photos/seed/304/200/200",
+      "imageHint": "student library"
+    },
+    {
+      "id": "testimonial-5",
+      "description": "Student holding a book, looking at the camera.",
+      "imageUrl": "https://picsum.photos/seed/305/200/200",
+      "imageHint": "student book"
+    },
+    {
+      "id": "testimonial-6",
+      "description": "A focused student working on a computer.",
+      "imageUrl": "https://picsum.photos/seed/306/200/200",
+      "imageHint": "student computer"
     }
   ]
 }

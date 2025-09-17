@@ -39,7 +39,7 @@ export function Courses() {
   return (
     <section id="courses" className="bg-muted/30">
       <div className="container">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
+        <div className="mx-auto mb-16 max-w-2xl text-center">
           <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl md:text-5xl">
             Find Your Path to Success
           </h2>
@@ -53,7 +53,7 @@ export function Courses() {
               key={index}
               className={`rounded-xl bg-gradient-to-br p-1 transition-all duration-300 hover:scale-105 hover:shadow-2xl ${course.gradient}`}
             >
-              <Card className="h-full">
+              <Card className="h-full flex flex-col">
                 <CardHeader>
                   <div className="mb-4 flex justify-center">
                     <div className="rounded-full bg-muted p-4">
@@ -62,7 +62,7 @@ export function Courses() {
                   </div>
                   <CardTitle className="text-center font-headline text-2xl">{course.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
+                <CardContent className="text-center flex-1">
                   <CardDescription>{course.description}</CardDescription>
                   <div className="mt-6">
                     <p className="mb-2 text-sm font-medium text-muted-foreground">

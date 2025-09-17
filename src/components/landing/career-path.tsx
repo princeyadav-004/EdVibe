@@ -57,14 +57,16 @@ export function CareerPath() {
     <section id="career-path" className="bg-muted/30">
       <div className="container grid gap-12 lg:grid-cols-2 lg:gap-24">
         {/* Left Side: Form */}
-        <div className="flex flex-col justify-center">
-          <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl md:text-5xl">
-            Map Your Future with AI
-          </h2>
-          <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-            Tell our AI about your passions and your dream job. It will generate a personalized step-by-step career roadmap to help you achieve your goals.
-          </p>
-          <form ref={formRef} action={dispatch} className="mt-8 space-y-4">
+        <div className="flex flex-col justify-center space-y-6">
+          <div>
+            <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl md:text-5xl">
+              Map Your Future with AI
+            </h2>
+            <p className="mt-4 max-w-xl text-lg text-muted-foreground">
+              Tell our AI about your passions and your dream job. It will generate a personalized step-by-step career roadmap to help you achieve your goals.
+            </p>
+          </div>
+          <form ref={formRef} action={dispatch} className="space-y-4">
             <div className="grid w-full gap-2">
               <Label htmlFor="prompt" className="text-base font-semibold">Describe your interests & career goals</Label>
               <Textarea
@@ -102,7 +104,7 @@ export function CareerPath() {
 
         {/* Right Side: Results */}
         <div className="flex min-h-[550px] items-center justify-center">
-          <Card className="w-full max-w-lg shadow-lg">
+          <Card className="w-full max-w-2xl shadow-lg">
             <CardHeader className="text-center pb-4">
                <div className="flex justify-center mb-2">
                 <div className="rounded-full bg-primary/10 p-3 border-2 border-primary/20">
@@ -138,7 +140,7 @@ export function CareerPath() {
                           <h4 className="font-semibold text-lg text-card-foreground mt-1">{step.title}</h4>
                           <p className="text-sm text-muted-foreground mt-1">{step.description}</p>
                           <div className="mt-4">
-                            <p className="text-xs font-semibold text-muted-foreground mb-2">SKILLS TO LEARN</p>
+                            <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wider">Skills to Learn</p>
                             <div className="flex flex-wrap gap-2">
                               {step.skillsToLearn.map(skill => <Badge variant="outline" key={skill}>{skill}</Badge>)}
                             </div>
@@ -149,7 +151,7 @@ export function CareerPath() {
                                 <CardContent className="p-3 flex items-center gap-3">
                                   <School className="h-5 w-5 text-primary flex-shrink-0" />
                                   <div>
-                                    <p className="text-xs font-semibold text-primary">RECOMMENDED COURSE</p>
+                                    <p className="text-xs font-semibold text-primary uppercase tracking-wider">Recommended Course</p>
                                     <p className="text-sm font-medium">{step.recommendedCourse}</p>
                                   </div>
                                 </CardContent>
