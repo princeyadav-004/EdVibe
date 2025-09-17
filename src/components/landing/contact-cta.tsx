@@ -19,7 +19,7 @@ export function ContactCta() {
             className="mt-8 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-transform hover:scale-105"
             asChild
           >
-            <Link href="#">Book a Free Counselling Session</Link>
+            <Link href="/#contact">Book a Free Counselling Session</Link>
           </Button>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
+import { redirect } from 'next/navigation';
 
 // This is a placeholder for a server action.
 // In a real app, this would save the data to a database.
@@ -19,8 +20,9 @@ async function addReview(formData: FormData) {
   console.log("New review submitted:", rawFormData);
   // Here you would typically save to a database.
   // For now, we'll just log it to the server console.
-  // After saving, you would redirect the user, perhaps to the testimonials page.
-  // redirect('/testimonials');
+  
+  // After saving, redirect the user to the testimonials page.
+  redirect('/testimonials');
 }
 
 export default function NewTestimonialPage() {
