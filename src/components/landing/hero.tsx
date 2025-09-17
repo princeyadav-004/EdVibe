@@ -22,10 +22,10 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/60" />
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
         <div className="container max-w-screen-md text-white">
-          <h1 className="text-4xl font-extrabold font-headline leading-tight tracking-tighter sm:text-6xl md:text-7xl">
+          <h1 className="text-4xl font-black font-headline leading-tight tracking-tighter sm:text-5xl md:text-6xl">
             Dream • Prepare • Achieve
           </h1>
-          <p className="mx-auto mt-6 max-w-[700px] text-lg text-gray-300">
+          <p className="mx-auto mt-6 max-w-[700px] text-lg text-gray-200 md:text-xl">
             Unlock your potential with our expert-led courses. EdVibe is your partner in building a successful future.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">

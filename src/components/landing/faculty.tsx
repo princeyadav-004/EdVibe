@@ -37,7 +37,7 @@ export function Faculty() {
     <section id="faculty">
       <div className="container">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl">
+          <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl md:text-5xl">
             Meet Our Expert Faculty
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
@@ -65,7 +65,7 @@ export function Faculty() {
                   )}
                 </CardHeader>
                 <CardContent className="p-6">
-                  <CardTitle className="font-headline text-xl">{member.name}</CardTitle>
+                  <CardTitle className="font-headline text-2xl">{member.name}</CardTitle>
                   <CardDescription className="mt-1 text-primary">{member.title}</CardDescription>
                 </CardContent>
                 <CardFooter className="flex-col gap-2 bg-muted/30 px-6 pb-6 pt-4">

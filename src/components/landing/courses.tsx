@@ -40,7 +40,7 @@ export function Courses() {
     <section id="courses" className="bg-muted/30">
       <div className="container">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl">
+          <h2 className="text-3xl font-bold font-headline leading-tight tracking-tighter sm:text-4xl md:text-5xl">
             Find Your Path to Success
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
@@ -60,7 +60,7 @@ export function Courses() {
                       <course.icon className="h-8 w-8 text-primary" />
                     </div>
                   </div>
-                  <CardTitle className="text-center font-headline">{course.title}</CardTitle>
+                  <CardTitle className="text-center font-headline text-2xl">{course.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <CardDescription>{course.description}</CardDescription>
