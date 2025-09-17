@@ -2,7 +2,6 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
-import { useFormStatus } from "react-dom";
 import { getCourseRecommendations, State } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,7 +12,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Label } from "../ui/label";
 
 function SubmitButton() {
-  const { pending } = useFormStatus();
+  // We can't use useFormStatus here because the form is not a direct parent of the button
+  // A simple way to manage loading state is to pass it as a prop from the main component
+  const [pending, setPending] = useActionState(async () => {
+    // This is a bit of a hack to get the pending state from the form
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  }, false);
+
   return (
     <Button type="submit" disabled={pending} className="w-full sm:w-auto">
       {pending ? (
@@ -43,8 +48,7 @@ function RecommenderSkeleton() {
 
 export function CourseRecommender() {
   const initialState: State = { message: null, errors: {} };
-  const [state, dispatch] = useActionState(getCourseRecommendations, initialState);
-  const { pending } = useFormStatus();
+  const [state, dispatch, pending] = useActionState(getCourseRecommendations, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   
@@ -92,7 +96,19 @@ export function CourseRecommender() {
                   ))}
               </div>
             </div>
-            <SubmitButton />
+            <Button type="submit" disabled={pending} className="w-full sm:w-auto">
+              {pending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Finding Courses...
+                </>
+              ) : (
+                <>
+                  <Wand2 className="mr-2 h-4 w-4" />
+                  Generate Recommendations
+                </>
+              )}
+            </Button>
           </form>
         </div>
 
@@ -118,15 +134,15 @@ export function CourseRecommender() {
               ) : state.recommendations && state.recommendations.length > 0 ? (
                 <ul className="space-y-4">
                   {state.recommendations.map((rec) => (
-                    <li key={rec}>
+                    <li key={rec.courseName}>
                       <Card className="bg-background/50 hover:bg-background transition-colors hover:shadow-md">
-                        <CardContent className="p-4 flex items-center gap-4">
-                          <div className="bg-secondary/10 p-2 rounded-lg">
+                        <CardContent className="p-4 flex items-start gap-4">
+                          <div className="bg-secondary/10 p-2 rounded-lg mt-1">
                             <Sparkles className="h-6 w-6 text-secondary" />
                           </div>
                           <div>
-                            <p className="font-semibold text-card-foreground">{rec}</p>
-                            <p className="text-sm text-muted-foreground">Recommended for you</p>
+                            <p className="font-semibold text-card-foreground">{rec.courseName}</p>
+                            <p className="text-sm text-muted-foreground">{rec.reason}</p>
                           </div>
                         </CardContent>
                       </Card>

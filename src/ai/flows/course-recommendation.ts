@@ -26,10 +26,15 @@ const RecommendCoursesInputSchema = z.object({
 
 export type RecommendCoursesInput = z.infer<typeof RecommendCoursesInputSchema>;
 
+const RecommendedCourseSchema = z.object({
+  courseName: z.string().describe("The name of a recommended course."),
+  reason: z.string().describe("A short, 1-2 sentence explanation of why this course is a good fit for the user based on their input.")
+});
+
 const RecommendCoursesOutputSchema = z.object({
   recommendedCourses: z
-    .string()
-    .describe('The recommended courses for the student, comma separated.'),
+    .array(RecommendedCourseSchema)
+    .describe('The recommended courses for the student, including a reason for each recommendation.'),
 });
 
 export type RecommendCoursesOutput = z.infer<typeof RecommendCoursesOutputSchema>;
@@ -44,12 +49,10 @@ const prompt = ai.definePrompt({
   output: {schema: RecommendCoursesOutputSchema},
   prompt: `You are an AI assistant that recommends courses to students based on their interests and academic history.
 
-  Student Interests: {{{interests}}}
-  Student Academic History: {{{academicHistory}}}
+  Student Interests & History: {{{interests}}}
   Available Courses: {{{courses}}}
 
-  Please recommend courses that are relevant to the student's interests and academic history.
-  Respond with just the comma separated names of the courses.`,
+  Please recommend up to 3 courses that are most relevant to the student's interests and academic history. For each course, provide a short, 1-2 sentence explanation for why you are recommending it, connecting it back to the student's prompt.`,
 });
 
 const recommendCoursesFlow = ai.defineFlow(

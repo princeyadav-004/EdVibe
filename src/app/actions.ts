@@ -1,7 +1,7 @@
 
 "use server";
 
-import { recommendCourses } from "@/ai/flows/course-recommendation";
+import { recommendCourses, RecommendCoursesOutput } from "@/ai/flows/course-recommendation";
 import { z } from "zod";
 
 const availableCourses = [
@@ -23,7 +23,7 @@ export type State = {
     prompt?: string[];
   };
   message?: string | null;
-  recommendations?: string[] | null;
+  recommendations?: RecommendCoursesOutput['recommendedCourses'] | null;
 };
 
 export async function getCourseRecommendations(
@@ -51,14 +51,10 @@ export async function getCourseRecommendations(
       courses: availableCourses.join(", "),
     });
 
-    if (result.recommendedCourses) {
-      const recommended = result.recommendedCourses.split(',').map(course => course.trim()).filter(Boolean);
-      if (recommended.length === 0) {
-        return { message: "We couldn't find a specific match right now. Please try refining your prompt." };
-      }
-      return { message: "Here are your recommended courses!", recommendations: recommended };
+    if (result.recommendedCourses && result.recommendedCourses.length > 0) {
+      return { message: "Here are your recommended courses!", recommendations: result.recommendedCourses };
     } else {
-      return { message: "Could not generate recommendations at this time. Please try again later." };
+      return { message: "We couldn't find a specific match right now. Please try refining your prompt." };
     }
 
   } catch (error) {
