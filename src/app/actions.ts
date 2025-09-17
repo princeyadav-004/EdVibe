@@ -178,6 +178,7 @@ export async function askTutor(prevState: TutorState, formData: FormData): Promi
 // Schema for adding a new review
 const ReviewSchema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters long.'),
+  email: z.string().email('Please enter a valid email address.'),
   course: z.string().min(3, 'Course name must be at least 3 characters long.'),
   review: z.string().min(20, 'Review must be at least 20 characters long.'),
 });
@@ -185,6 +186,7 @@ const ReviewSchema = z.object({
 export type ReviewState = {
   errors?: {
     name?: string[];
+    email?: string[];
     course?: string[];
     review?: string[];
   };
@@ -195,6 +197,7 @@ export type ReviewState = {
 export async function addReview(prevState: ReviewState, formData: FormData): Promise<ReviewState> {
   const validatedFields = ReviewSchema.safeParse({
     name: formData.get('name'),
+    email: formData.get('email'),
     course: formData.get('course'),
     review: formData.get('review'),
   });

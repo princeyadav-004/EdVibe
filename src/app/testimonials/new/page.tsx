@@ -49,6 +49,18 @@ export default function NewTestimonialPage() {
                       ))}
                   </div>
                 </div>
+                 <div className="space-y-2">
+                  <Label htmlFor="email" className="text-base font-medium">Your Email Address</Label>
+                  <Input id="email" name="email" type="email" placeholder="e.g., rohan@example.com" required className="bg-background" />
+                  <div id="email-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.email &&
+                      state.errors.email.map((error: string) => (
+                        <p className="mt-1 text-sm text-destructive" key={error}>
+                          {error}
+                        </p>
+                      ))}
+                  </div>
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="course" className="text-base font-medium">Course You Took</Label>
                   <Input id="course" name="course" placeholder="e.g., Web Development" required className="bg-background"/>
@@ -90,7 +102,10 @@ export default function NewTestimonialPage() {
                     ) : 'Submit Your Review'}
                   </Button>
                 </div>
-                 {state.message && (
+                 {state.message && !state.errors && (
+                  <p className="mt-4 text-sm text-green-600 text-center">{state.message}</p>
+                )}
+                 {state.message && state.errors && (
                   <p className="mt-4 text-sm text-destructive text-center">{state.message}</p>
                 )}
               </form>
@@ -102,4 +117,3 @@ export default function NewTestimonialPage() {
     </div>
   );
 }
-
