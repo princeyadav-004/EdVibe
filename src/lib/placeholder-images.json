@@ -77,6 +77,42 @@
       "description": "A focused student working on a computer.",
       "imageUrl": "https://picsum.photos/seed/306/200/200",
       "imageHint": "student computer"
+    },
+    {
+      "id": "project-web-1",
+      "description": "Screenshot of a modern e-commerce website.",
+      "imageUrl": "https://picsum.photos/seed/401/800/600",
+      "imageHint": "ecommerce website"
+    },
+    {
+      "id": "project-web-2",
+      "description": "Screenshot of a personal portfolio blog.",
+      "imageUrl": "https://picsum.photos/seed/402/800/600",
+      "imageHint": "portfolio blog"
+    },
+    {
+      "id": "project-ui-1",
+      "description": "Mobile app design for a fitness tracker.",
+      "imageUrl": "https://picsum.photos/seed/403/800/600",
+      "imageHint": "mobile app"
+    },
+    {
+      "id": "project-ui-2",
+      "description": "Dashboard design for a project management tool.",
+      "imageUrl": "https://picsum.photos/seed/404/800/600",
+      "imageHint": "dashboard design"
+    },
+    {
+      "id": "project-data-1",
+      "description": "Data visualization of sales trends.",
+      "imageUrl": "https://picsum.photos/seed/405/800/600",
+      "imageHint": "sales chart"
+    },
+    {
+      "id": "project-data-2",
+      "description": "A map showing customer distribution.",
+      "imageUrl": "https://picsum.photos/seed/406/800/600",
+      "imageHint": "customer map"
     }
   ]
 }

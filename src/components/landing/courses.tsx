@@ -1,5 +1,5 @@
 
-import { Code, Palette, AreaChart } from "lucide-react";
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -10,30 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-
-const coursesData = [
-  {
-    icon: Code,
-    title: "Web Development",
-    description: "Master front-end and back-end technologies to build modern web applications from scratch.",
-    successRate: 95,
-    gradient: "from-primary to-accent",
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Learn the principles of user-centric design to create beautiful and intuitive digital experiences.",
-    successRate: 92,
-    gradient: "from-sky-400 to-cyan-300",
-  },
-  {
-    icon: AreaChart,
-    title: "Data Science",
-    description: "Dive into data analysis, machine learning, and visualization to extract meaningful insights.",
-    successRate: 88,
-    gradient: "from-secondary to-orange-400",
-  },
-];
+import { coursesData } from '@/lib/courses-data';
 
 export function Courses() {
   return (
@@ -72,8 +49,8 @@ export function Courses() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="w-full">
-                    Learn More
+                   <Button asChild variant="outline" className="w-full">
+                    <Link href={`/courses/${course.slug}`}>Learn More</Link>
                   </Button>
                 </CardFooter>
               </Card>
