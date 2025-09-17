@@ -15,14 +15,12 @@ const availableCourses = [
 ];
 
 const CourseRecommendationSchema = z.object({
-  interests: z.string().min(3, { message: "Interests must be at least 3 characters long." }),
-  academicHistory: z.string().min(10, { message: "Academic history must be at least 10 characters long." }),
+  prompt: z.string().min(20, { message: "Please provide more details about your interests and background (at least 20 characters)." }),
 });
 
 export type State = {
   errors?: {
-    interests?: string[];
-    academicHistory?: string[];
+    prompt?: string[];
   };
   message?: string | null;
   recommendations?: string[] | null;
@@ -33,28 +31,31 @@ export async function getCourseRecommendations(
   formData: FormData
 ): Promise<State> {
   const validatedFields = CourseRecommendationSchema.safeParse({
-    interests: formData.get("interests"),
-    academicHistory: formData.get("academicHistory"),
+    prompt: formData.get("prompt"),
   });
 
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Invalid input. Please check the fields and try again.",
+      message: "Invalid input. Please check the form and try again.",
     };
   }
   
-  const { interests, academicHistory } = validatedFields.data;
+  const { prompt } = validatedFields.data;
 
   try {
+    // We pass the user's prompt as both interests and academic history for a more holistic recommendation.
     const result = await recommendCourses({
-      interests,
-      academicHistory,
+      interests: prompt,
+      academicHistory: prompt,
       courses: availableCourses.join(", "),
     });
 
     if (result.recommendedCourses) {
-      const recommended = result.recommendedCourses.split(',').map(course => course.trim());
+      const recommended = result.recommendedCourses.split(',').map(course => course.trim()).filter(Boolean);
+      if (recommended.length === 0) {
+        return { message: "We couldn't find a specific match right now. Please try refining your prompt." };
+      }
       return { message: "Here are your recommended courses!", recommendations: recommended };
     } else {
       return { message: "Could not generate recommendations at this time. Please try again later." };
