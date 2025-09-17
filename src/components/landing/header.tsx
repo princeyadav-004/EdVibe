@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -8,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -61,6 +65,12 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Menu</SheetTitle>
+                <SheetDescription>
+                  Main navigation menu for the EdVibe platform.
+                </SheetDescription>
+              </SheetHeader>
               <div className="flex flex-col gap-6">
                 <Link
                   href="/"
