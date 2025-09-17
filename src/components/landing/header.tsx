@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -15,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "#courses", label: "Courses" },
-  { href: "#recommender", label: "AI Recommender" },
+  { href: "#career-path", label: "Career Path" },
   { href: "#faculty", label: "Faculty" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },

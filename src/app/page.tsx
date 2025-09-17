@@ -4,7 +4,7 @@ import { Courses } from "@/components/landing/courses";
 import { Faculty } from "@/components/landing/faculty";
 import { ContactCta } from "@/components/landing/contact-cta";
 import { Footer } from "@/components/landing/footer";
-import { CourseRecommender } from "@/components/landing/course-recommender";
+import { CareerPath } from "@/components/landing/career-path";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Courses />
-        <CourseRecommender />
+        <CareerPath />
         <Faculty />
         <ContactCta />
       </main>
