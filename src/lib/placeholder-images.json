@@ -42,6 +42,24 @@
       "imageUrl": "https://picsum.photos/seed/203/400/400",
       "imageHint": "professional mentor"
     },
+     {
+      "id": "faculty-4",
+      "description": "Portrait of a marketing expert.",
+      "imageUrl": "https://picsum.photos/seed/204/400/400",
+      "imageHint": "marketing expert"
+    },
+    {
+      "id": "faculty-5",
+      "description": "Portrait of a female data scientist.",
+      "imageUrl": "https://picsum.photos/seed/205/400/400",
+      "imageHint": "data scientist"
+    },
+    {
+      "id": "faculty-6",
+      "description": "Portrait of a cloud engineer.",
+      "imageUrl": "https://picsum.photos/seed/206/400/400",
+      "imageHint": "cloud engineer"
+    },
     {
       "id": "testimonial-1",
       "description": "Happy student giving a thumbs up.",
@@ -113,6 +131,42 @@
       "description": "A map showing customer distribution.",
       "imageUrl": "https://picsum.photos/seed/406/800/600",
       "imageHint": "customer map"
+    },
+    {
+      "id": "project-dm-1",
+      "description": "A chart showing SEO keyword ranking improvements.",
+      "imageUrl": "https://picsum.photos/seed/407/800/600",
+      "imageHint": "SEO chart"
+    },
+    {
+      "id": "project-dm-2",
+      "description": "Example of a social media ad campaign.",
+      "imageUrl": "https://picsum.photos/seed/408/800/600",
+      "imageHint": "social media"
+    },
+    {
+      "id": "project-ml-1",
+      "description": "Grid of images being classified by a model.",
+      "imageUrl": "https://picsum.photos/seed/409/800/600",
+      "imageHint": "image classification"
+    },
+    {
+      "id": "project-ml-2",
+      "description": "Text analysis showing sentiment scores.",
+      "imageUrl": "https://picsum.photos/seed/410/800/600",
+      "imageHint": "text analysis"
+    },
+    {
+      "id": "project-cloud-1",
+      "description": "Architectural diagram of a cloud deployment.",
+      "imageUrl": "https://picsum.photos/seed/411/800/600",
+      "imageHint": "cloud architecture"
+    },
+    {
+      "id": "project-cloud-2",
+      "description": "Code snippet of a serverless function.",
+      "imageUrl": "https://picsum.photos/seed/412/800/600",
+      "imageHint": "serverless code"
     },
     {
       "id": "about-hero",

@@ -1,4 +1,4 @@
-import { Code, Palette, AreaChart } from "lucide-react";
+import { Code, Palette, AreaChart, Megaphone, BrainCircuit, Cloud } from "lucide-react";
 import { Faculty, facultyData } from "./faculty-data";
 
 export type Course = {
@@ -152,6 +152,138 @@ export const coursesData: Course[] = [
         title: "Customer Segmentation",
         description: "Use clustering algorithms to segment a customer base for targeted marketing campaigns.",
         imageId: "project-data-2",
+      },
+    ],
+  },
+  {
+    title: "Digital Marketing",
+    slug: "digital-marketing",
+    icon: Megaphone,
+    description: "Learn SEO, SEM, and social media strategies to grow businesses online.",
+    longDescription: "This course covers the entire digital marketing landscape. You will master search engine optimization (SEO), pay-per-click (PPC) advertising, social media marketing, content marketing, and email marketing. You'll get hands-on experience with tools like Google Analytics and Facebook Ads Manager.",
+    successRate: 91,
+    gradient: "from-green-400 to-blue-500",
+    instructorId: "faculty-4",
+    syllabus: [
+      {
+        module: "Module 1: Marketing Fundamentals",
+        description: "Understanding core marketing principles in the digital age.",
+        topics: ["Marketing Funnels", "Target Audience Research", "Branding & Positioning", "Analytics & KPIs"],
+      },
+      {
+        module: "Module 2: Acquiring Traffic",
+        description: "Driving users to your website.",
+        topics: ["Search Engine Optimization (SEO)", "Pay-Per-Click (PPC) with Google Ads", "Social Media Advertising", "Content Marketing"],
+      },
+      {
+        module: "Module 3: Engagement & Retention",
+        description: "Building relationships with your audience.",
+        topics: ["Email Marketing Automation", "Community Management", "Conversion Rate Optimization (CRO)", "A/B Testing"],
+      },
+      {
+        module: "Module 4: Strategy & Capstone",
+        description: "Developing a comprehensive marketing plan.",
+        topics: ["Integrated Digital Strategy", "Budgeting & Planning", "Marketing Campaign Analysis", "Final Capstone Project"],
+      },
+    ],
+    projects: [
+      {
+        title: "Local Business SEO Audit",
+        description: "Perform a complete SEO audit for a local business and provide actionable recommendations.",
+        imageId: "project-dm-1",
+      },
+      {
+        title: "Social Media Campaign",
+        description: "Plan, execute, and measure a social media campaign for a fictional product launch.",
+        imageId: "project-dm-2",
+      },
+    ],
+  },
+  {
+    title: "Machine Learning",
+    slug: "machine-learning",
+    icon: BrainCircuit,
+    description: "Explore advanced algorithms and build intelligent systems.",
+    longDescription: "Go beyond basic data science and dive deep into the world of machine learning. This course covers advanced topics like deep learning, natural language processing (NLP), and computer vision. You'll build and train neural networks using TensorFlow and PyTorch.",
+    successRate: 85,
+    gradient: "from-purple-500 to-pink-500",
+    instructorId: "faculty-5",
+    syllabus: [
+      {
+        module: "Module 1: Advanced Regression & Classification",
+        description: "Refining predictive models.",
+        topics: ["Support Vector Machines (SVM)", "Ensemble Methods (Gradient Boosting)", "Regularization Techniques", "Model Selection & Hyperparameter Tuning"],
+      },
+      {
+        module: "Module 2: Neural Networks & Deep Learning",
+        description: "Understanding the architecture of the modern AI.",
+        topics: ["Introduction to Neural Networks", "Building models with TensorFlow/Keras", "Convolutional Neural Networks (CNNs) for Image Data", "Recurrent Neural Networks (RNNs) for Sequence Data"],
+      },
+      {
+        module: "Module 3: Natural Language Processing (NLP)",
+        description: "Teaching computers to understand human language.",
+        topics: ["Text Preprocessing & Vectorization", "Sentiment Analysis", "Topic Modeling", "Introduction to Transformers (BERT)"],
+      },
+      {
+        module: "Module 4: Deployment & Ethics",
+        description: "Bringing ML models into production.",
+        topics: ["ML Operations (MLOps)", "Deploying models as APIs", "AI Ethics and Bias", "Final Capstone Project"],
+      },
+    ],
+    projects: [
+      {
+        title: "Image Classifier",
+        description: "Build a deep learning model to classify images into different categories (e.g., cats vs. dogs).",
+        imageId: "project-ml-1",
+      },
+      {
+        title: "Movie Review Sentiment Analyzer",
+        description: "Use NLP techniques to determine whether a movie review is positive or negative.",
+        imageId: "project-ml-2",
+      },
+    ],
+  },
+  {
+    title: "Cloud Computing",
+    slug: "cloud-computing",
+    icon: Cloud,
+    description: "Master cloud platforms like AWS and Azure to deploy scalable applications.",
+    longDescription: "Learn how to design, deploy, and manage applications on leading cloud platforms. This course covers core concepts like virtual machines, containers, serverless computing, and infrastructure as code. You'll get hands-on experience with AWS, and Azure.",
+    successRate: 89,
+    gradient: "from-blue-500 to-indigo-600",
+    instructorId: "faculty-6",
+    syllabus: [
+      {
+        module: "Module 1: Cloud Fundamentals",
+        description: "Understanding the core concepts of cloud computing.",
+        topics: ["IaaS, PaaS, SaaS", "Virtualization & Containers", "Cloud Security Principles", "Cost Management"],
+      },
+      {
+        module: "Module 2: Core Cloud Services (AWS)",
+        description: "Getting hands-on with Amazon Web Services.",
+        topics: ["EC2 & S3", "VPC & Networking", "IAM & Security", "RDS & Databases"],
+      },
+      {
+        module: "Module 3: Scalability & Automation",
+        description: "Building resilient and automated systems.",
+        topics: ["Auto Scaling & Load Balancing", "Infrastructure as Code (Terraform)", "CI/CD Pipelines", "Serverless with AWS Lambda"],
+      },
+      {
+        module: "Module 4: Containers & Orchestration",
+        description: "Modern application deployment.",
+        topics: ["Docker Fundamentals", "Containerizing Applications", "Kubernetes (EKS)", "Final Capstone Project"],
+      },
+    ],
+    projects: [
+      {
+        title: "Scalable Web Server",
+        description: "Deploy a web application on AWS with an auto-scaling group and a load balancer.",
+        imageId: "project-cloud-1",
+      },
+      {
+        title: "Serverless API",
+        description: "Build and deploy a REST API using AWS Lambda and API Gateway.",
+        imageId: "project-cloud-2",
       },
     ],
   },
