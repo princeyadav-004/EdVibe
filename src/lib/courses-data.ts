@@ -289,10 +289,10 @@ export const coursesData: Course[] = [
   },
 ];
 
-export function getCourseBySlug(slug: string): Course | undefined {
+export async function getCourseBySlug(slug: string): Promise<Course | undefined> {
   return coursesData.find((course) => course.slug === slug);
 }
 
-export function getInstructorForCourse(course: Course): Faculty | undefined {
+export async function getInstructorForCourse(course: Course): Promise<Faculty | undefined> {
   return facultyData.find((faculty) => faculty.id === course.instructorId);
 }

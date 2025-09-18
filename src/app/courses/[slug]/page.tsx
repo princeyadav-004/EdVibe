@@ -13,13 +13,13 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle, Book, Users, BarChart, ArrowRight } from 'lucide-react';
 
 export default async function CourseDetailPage({ params }: { params: { slug: string } }) {
-  const course = getCourseBySlug(params.slug);
+  const course = await getCourseBySlug(params.slug);
 
   if (!course) {
     notFound();
   }
 
-  const instructor = getInstructorForCourse(course);
+  const instructor = await getInstructorForCourse(course);
   const instructorImage = instructor ? PlaceHolderImages.find(img => img.id === instructor.id) : undefined;
 
   return (
