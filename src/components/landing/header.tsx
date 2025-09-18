@@ -3,18 +3,21 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { BookOpen, Menu, X, Bot } from "lucide-react";
-
+import Image from "next/image";
+import { BookOpen, Menu, LogOut, LayoutDashboard, Bot, User, LogIn, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/context/auth-context";
+import { Skeleton } from "../ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const navLinks = [
   { href: "/#courses", label: "Courses" },
@@ -23,8 +26,55 @@ const navLinks = [
   { href: "/tutor", label: "AI Tutor" },
   { href: "/#faculty", label: "Faculty" },
   { href: "/testimonials", label: "Testimonials" },
-  { href: "/#contact", label: "Contact" },
 ];
+
+function AuthNav() {
+  const { user, loading, signInWithGoogle, logout } = useAuth();
+
+  if (loading) {
+    return <Skeleton className="h-10 w-24" />;
+  }
+
+  if (!user) {
+    return (
+      <Button onClick={signInWithGoogle}>
+        <LogIn className="mr-2" />
+        Sign In
+      </Button>
+    );
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="flex items-center gap-2">
+          <Avatar className="h-8 w-8">
+            {user.photoURL && <AvatarImage src={user.photoURL} alt={user.displayName || "User"} />}
+            <AvatarFallback>
+              {user.displayName ? user.displayName.charAt(0) : <User />}
+            </AvatarFallback>
+          </Avatar>
+          <span className="hidden sm:inline">{user.displayName}</span>
+          <ChevronDown className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/dashboard">
+            <LayoutDashboard className="mr-2" />
+            Dashboard
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={logout}>
+          <LogOut className="mr-2" />
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -49,10 +99,10 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="flex flex-1 items-center justify-end">
-          <Button className="hidden md:flex" asChild>
-            <Link href="/#contact">Join Now</Link>
-          </Button>
+        <div className="flex flex-1 items-center justify-end space-x-2">
+          <div className="hidden md:block">
+            <AuthNav />
+          </div>
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild>
               <Button
@@ -65,13 +115,11 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
-              <SheetHeader className="sr-only">
-                <SheetTitle>Menu</SheetTitle>
-                <SheetDescription>
-                  Main navigation menu for the EdVibe platform.
-                </SheetDescription>
-              </SheetHeader>
-              <div className="flex flex-col gap-6">
+               <div className="sr-only">
+                  <h2 id="mobile-menu-title">Navigation Menu</h2>
+                  <p id="mobile-menu-description">Use the links below to navigate the site.</p>
+                </div>
+              <div className="flex flex-col gap-6 pt-6">
                 <Link
                   href="/"
                   className="flex items-center space-x-2"
@@ -91,10 +139,17 @@ export function Header() {
                       {link.label}
                     </Link>
                   ))}
+                  <Link
+                      href="/dashboard"
+                      className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
                 </nav>
-                <Button onClick={() => setIsMenuOpen(false)} asChild>
-                  <Link href="/#contact">Join Now</Link>
-                </Button>
+                 <div className="mt-4">
+                  <AuthNav />
+                </div>
               </div>
             </SheetContent>
           </Sheet>
