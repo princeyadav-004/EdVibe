@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BookOpen, Menu, LogOut, LayoutDashboard, Bot, User, LogIn, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -115,10 +115,10 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
-               <div className="sr-only">
-                  <h2 id="mobile-menu-title">Navigation Menu</h2>
-                  <p id="mobile-menu-description">Use the links below to navigate the site.</p>
-                </div>
+               <SheetHeader className="sr-only">
+                  <SheetTitle>Navigation Menu</SheetTitle>
+                  <SheetDescription>Use the links below to navigate the site.</SheetDescription>
+                </SheetHeader>
               <div className="flex flex-col gap-6 pt-6">
                 <Link
                   href="/"
