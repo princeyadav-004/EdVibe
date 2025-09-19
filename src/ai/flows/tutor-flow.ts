@@ -40,7 +40,7 @@ const prompt = ai.definePrompt({
 
 Conversation History:
 {{#each history}}
-  - {{role}}: {{{parts.[0].text}}}
+- {{role}}: {{#each parts}}{{{text}}}{{/each}}
 {{/each}}
 
 New Question: {{{question}}}
