@@ -7,11 +7,13 @@ import { AuthProvider } from '@/context/auth-context';
 
 const fontBody = Inter({
   subsets: ['latin'],
+  display: 'swap',
   variable: '--font-body',
 });
 
 const fontHeadline = Playfair_Display({
   subsets: ['latin'],
+  display: 'swap',
   variable: '--font-headline',
 });
 
@@ -27,11 +29,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="!scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
       <body
         className={cn(
           'font-body antialiased',
