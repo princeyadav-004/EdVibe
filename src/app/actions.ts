@@ -166,8 +166,16 @@ export async function askTutor(prevState: TutorState, formData: FormData): Promi
       messages: [...newMessages, modelMessage],
       error: null,
     };
-  } catch (error) {
-    console.error('AI Tutor Error:', error);
+  } catch (e: any) {
+    console.error('AI Tutor Error:', e);
+    // Check for a rate limit error specifically.
+    if (e.message && e.message.includes('429')) {
+       return {
+        ...prevState,
+        error: 'The AI is getting a lot of questions right now. Please wait a moment and try again.',
+      };
+    }
+    // Fallback to a generic error message.
     return {
       ...prevState,
       error: 'Sorry, I encountered an error trying to get an answer. Please try again.',
