@@ -10,6 +10,8 @@ import { Bot, User, Loader2, Send, CornerDownLeft } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function ChatMessage({ message }: { message: TutorMessage }) {
   const isModel = message.role === 'model';
@@ -26,7 +28,11 @@ function ChatMessage({ message }: { message: TutorMessage }) {
           isModel ? 'bg-muted' : 'bg-primary text-primary-foreground'
         )}
       >
-        <p className="whitespace-pre-wrap">{message.text}</p>
+        <div className="prose prose-sm prose-p:whitespace-pre-wrap max-w-none text-current prose-headings:text-current prose-strong:text-current prose-a:text-current hover:prose-a:text-current/80">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {message.text}
+          </ReactMarkdown>
+        </div>
       </div>
        {!isModel && (
         <Avatar className="h-8 w-8 border">

@@ -72,6 +72,25 @@
   section {
     @apply py-20 sm:py-28;
   }
+   /* Styles for react-markdown */
+  .prose {
+    @apply text-foreground;
+  }
+  .prose code {
+    @apply rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+  .prose pre {
+    @apply rounded-md bg-muted p-4;
+  }
+  .prose pre code {
+    @apply p-0 bg-transparent border-none;
+  }
+  .prose ul {
+    @apply list-disc pl-6;
+  }
+  .prose ol {
+    @apply list-decimal pl-6;
+  }
 }
 
 @layer utilities {
