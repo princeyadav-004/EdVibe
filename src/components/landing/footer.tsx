@@ -11,13 +11,13 @@ export function Footer() {
           <span className="font-bold font-headline text-white">EdVibe</span>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="#" aria-label="Instagram">
+          <Link href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
             <Instagram className="h-6 w-6 transition-colors hover:text-white" />
           </Link>
-          <Link href="#" aria-label="YouTube">
+          <Link href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
             <Youtube className="h-6 w-6 transition-colors hover:text-white" />
           </Link>
-          <Link href="#" aria-label="WhatsApp">
+          <Link href="#" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
             <MessageCircle className="h-6 w-6 transition-colors hover:text-white" />
           </Link>
         </div>
